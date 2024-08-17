@@ -42,7 +42,7 @@ export default function RootLayout({
           content="acTIP을 통해 SNS 콘텐츠를 분류, 정리하고 실천까지 해보세요. "
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.acTIP.com" />
+        <meta property="og:url" content="https://www.actip.com" />
         <meta
           property="og:image"
           content="https://www.acTIP.com/public/image/system/logo_color.png"
