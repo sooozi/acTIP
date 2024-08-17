@@ -1,0 +1,20 @@
+.formBtn {
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  background: #000;
+  font-family: 'Inconsolata';
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.formBtnWeak {
+  color: black;
+  width: 100%;
+  height: 40px;
+  background: var(--appl-color-sub);
+  font-family: 'Inconsolata';
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid black;
+}

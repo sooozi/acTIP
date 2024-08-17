@@ -1,0 +1,8 @@
+.tipListObject {
+  display: block;
+  cursor: pointer;
+  height: 50px;
+  border: 1px solid gray;
+  margin: 5px 0px;
+  border-radius: 5px;
+}

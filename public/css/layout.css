@@ -1,0 +1,355 @@
+/* ==============================================
+ * Layout :: body 
+ * ============================================== */
+body {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size);
+  background-color: var(--appl-color);
+}
+
+/* ==============================================
+ * Layout :: header 
+ * ============================================== */
+header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  top: 0px;
+  height: 50px;
+  width: 440px;
+  max-width: 430px;
+  padding: 50px 30px 10px 30px;
+  background-color: var(--appl-color-sub);
+  z-index: 2;
+}
+
+.page-top > div {
+  padding: 10px 30px 30px 30px;
+  height: 150px;
+}
+
+.page-top > div > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-top > div > div:nth-child(1) > div:nth-child(2) > span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.page-top > div > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+.page-top.fixed {
+  position: fixed;
+  top: 50px;
+  width: inherit;
+  z-index: 1;
+  height: 150px;
+  background: #f8fff1;
+}
+.tab-wrap {
+  position: fixed;
+  top: 200px;
+  width: 100%;
+  max-width: 430px;
+  z-index: 1;
+}
+.cont-pdt50 {
+  padding-top: 200px;
+}
+
+/* ==============================================
+ * Layout :: main 
+ * ============================================== */
+main {
+  display: flex;
+  width: 100%;
+  background-color: #000;
+}
+.mainMO {
+  position: relative;
+  left: 50vw;
+  width: 430px;
+  max-width: 100%;
+  min-height: 100dvh;
+  background-color: var(--appl-color-sub);
+  padding: 50px 0px 60px 0px;
+}
+.mo-main-txt {
+  width: 100%;
+  align-self: flex-start;
+}
+.mo-main-logoTit {
+  margin-top: 10px;
+  font-weight: 300;
+  font-family: Inconsolata, monospace;
+}
+.mo-main-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.mo-main-img img {
+  width: fit-content;
+  height: fit-content;
+}
+.mainPC {
+  position: fixed;
+  top: 0px;
+  left: calc(50vw - 750px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 750px;
+  margin-right: 100px;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 0px 0px 0px 0px;
+}
+.mainPC > div:nth-child(1) {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 50dvh;
+}
+.mainPC > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding-top: 100px;
+  height: 50dvh;
+}
+
+/* ==============================================
+ * Layout :: sub
+ * ============================================== */
+.subMO {
+  width: 100%;
+  max-width: 430px;
+  padding-bottom: clamp(138px, 15dvh, 20dvh);
+}
+.subMO-top {
+  padding-top: 5dvh;
+}
+.subMO-side {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* ==============================================
+ * Layout :: navBottom 
+ * ============================================== */
+.navBottom {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  z-index: 1;
+  flex-direction: row;
+  width: 100%;
+  max-width: 430px;
+  height: 70px;
+  /* padding: 4px 0px; */
+  border-top: 1px solid #000;
+  background-color: var(--appl-color-sub);
+}
+.navBottom > div {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.navBottom > div:not(:last-child) {
+  border-right: 1px solid var(--appl-color-sub);
+}
+.navBottom > div > a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.navBottom > div > a > svg {
+  margin-bottom: 3px;
+}
+.navBottom > div > a > span {
+  font-size: 0.75em;
+}
+.navBottom > div > a.active {
+  color: var(--appl-color);
+}
+.navBottom > div > a.active > svg {
+  fill: var(--appl-color);
+}
+.navBottom > div > a .icon-cont {
+  display: none;
+}
+.navBottom > div > a .icon-dot {
+  background: none;
+  background-color: black;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  margin: 12px 0px;
+}
+.navBottom > div > a.active1 .icon-dot {
+  display: none;
+}
+.navBottom > div > a.active1 .icon-cont {
+  display: block;
+  background: url(/image/system/navBottom_01.png) no-repeat 50% 0;
+  width: 40%;
+  height: 30px;
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 26px;
+}
+.navBottom .txt-cont {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* ==============================================
+ * Layout :: modal
+ * ============================================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.modal::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+}
+.modal-content {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 500px;
+  background-color: #f8fff1;
+  padding-top: 30px;
+}
+.modal-topCont {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px 25px;
+  border-bottom: 1px solid #000;
+}
+.modal-title {
+  font-family: 'Pretendard';
+  font-size: 16px;
+  font-weight: 600;
+}
+.modal-txtCont {
+  padding: 30px 30px 30px;
+}
+.modal-scrollCont {
+  height: 350px;
+  overflow: hidden;
+  overflow-y: scroll;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Pretendard';
+  white-space: pre-line;
+  padding-right: 3px;
+}
+.modal-txtBold {
+  display: block;
+  margin: 30px 0 6px;
+  font-size: 20px;
+}
+.modal-scrollCont::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-scrollCont::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.modal-scrollCont::-webkit-scrollbar-track {
+  background: transparent;
+}
+.btn_close {
+  border: none;
+  font-size: 20px;
+  font-weight: 100;
+  color: #000;
+  background: transparent;
+  cursor: pointer;
+}
+.btn-modal {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Pretendard';
+}
+
+.image-error.modal {
+  z-index: 2;
+}
+.image-error.modal .modal-content {
+  height: auto;
+  padding: 70px 0;
+  text-align: center;
+  background-color: #000;
+  border: 1px solid #F8FFF1;
+}
+.image-error.modal .modal-content p {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 200;
+  font-family: 'Pretendard';
+}
+.image-error.modal .btn_close {
+  color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+/* ==============================================
+ * Layout :: media
+ * ============================================== */
+@media (min-width: 0px) and (max-width: 1599px) {
+  main {
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .mainMO {
+    position: static;
+  }
+  .mainPC {
+    display: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  .mainPC {
+    display: flex;
+  }
+}

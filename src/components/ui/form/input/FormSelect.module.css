@@ -1,0 +1,25 @@
+.formSelectWrap {
+  margin-top: 40px;
+}
+
+.formSelectWrap label {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.formSelect {
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-size: 16px;
+  font-family: 'Inconsolata';
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1);
+}
+.formSelect::placeholder {
+  font-family: 'Inconsolata';
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+}

@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+span {
+  font-family: 'Inconsolata', monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
+}
+a {
+  font-family: "Pretendard";
+}
+.subMo-tit {
+  font-family: 'Inconsolata';
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
+  margin-bottom: 70px;
+}
+.font-color {
+  color: #f8fff1;
+}
+.font-color-white {
+  color: white;
+}
+.font-highlight {
+  color: #04E000;
+}
+.font-highlight-underline {
+  color: #04E000 !important;
+  border-bottom: 1px solid #04E000;
+}
+.font-underline {
+  font-size: 12px;
+  font-family: "Pretendard";
+  background: transparent;
+  border-bottom: 1px solid #000;
+}
+.font-red {
+  color: #DE1B1B;
+}
+
+.font-10 {
+  font-size: 1rem !important;
+}
+.font-12 {
+  font-size: 12px !important;
+}
+.font-15 {
+  font-size: 1.5rem !important;
+}
+.font-20 {
+  font-size: 20px !important;
+}
+
+/* 서브 페이지 타이틀 */
+.font-24 {
+  font-size: 24px !important;
+}
+.font-25 {
+  font-size: 2.5rem !important;
+}
+.font-30 {
+  font-size: 3rem !important;
+}
+
+.font-wt-700 {
+  font-weight: 700;
+}
+
+.font-small-gray {
+  text-align: right;
+  font-size: 12px !important;
+  font-weight: 500;
+  letter-spacing: -1px;
+  color:rgba(0, 0, 0, 0.5);
+}
+.txt_right_box {
+  text-align: right;
+}
+.txt-invalid {
+  position: absolute;
+  font-family: 'Pretendard';
+}
+
+.line-10 {
+  line-height: 1;
+}
+.line-15 {
+  line-height: 1.5;
+}

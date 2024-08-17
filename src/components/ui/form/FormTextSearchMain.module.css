@@ -1,0 +1,26 @@
+.formTextSearchMain {
+  position: relative;
+  width: 400px;
+  height: 65px;
+  background-color: white;
+  border: 3px solid var(--appl-color);
+  border-radius: 30px;
+  padding: 0px 0px 0px 30px;
+}
+
+.formTextSearchMain > input {
+  width: 290px;
+  height: 60px;
+  font-size: 22px;
+  background-color: transparent;
+}
+
+.formTextSearchMain > button {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 63px;
+  height: 63px;
+  background-color: var(--appl-color);
+  border-radius: 100%;
+}

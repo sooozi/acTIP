@@ -1,0 +1,37 @@
+.page-mo-root {
+  z-index: 10;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--appl-color);
+}
+
+.page-pc-root {
+  display: block;
+}
+
+@media (min-width: 0px) and (max-width: 1599px) {
+  .page-mo-root {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15dvh 0;
+    text-align: center;
+  }
+  .page-pc-root {
+    display: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  .page-mo-root {
+    display: none;
+  }
+  .page-pc-root {
+    display: block;
+  }
+}

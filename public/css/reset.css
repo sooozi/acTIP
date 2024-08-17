@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-weight: 600;
+  -webkit-tap-highlight-color: transparent;
+}
+
+nav,
+nav * {
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+ol,
+ul {
+  list-style: none;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+  letter-spacing: -1px;
+}
+
+a:visited {
+  color: inherit;
+}
+
+input:not([type="checkbox"]) {
+  border-radius: 0;
+  appearance: none; 
+  -webkit-appearance: none;
+}
+input[type="text"]#name {
+  padding-right: 25%;
+  text-overflow: ellipsis;
+}
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"] + label {
+  font-family: "Pretendard";
+  font-weight: 500;
+  padding-left: 30px;
+  letter-spacing: -0.3px;
+  position: relative;
+}
+input[type="checkbox"] + label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 19px;
+  height: 19px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: transparent;
+}
+ input[type="checkbox"]:checked + label::after {
+  background: #000 url("/image/icon/icon_chk_white.png") no-repeat center;
+  background-size: 10px;
+}
+.checkBoxWrapper input[type="checkbox"]:checked + label::after {
+  background: #04E000 url("/image/icon/icon_chk_white.png") no-repeat center;
+  background-size: 10px;
+  border: 1px solid #04E000;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+details {
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+label {
+  display: inline-block;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.5rem;
+}

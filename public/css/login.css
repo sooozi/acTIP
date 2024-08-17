@@ -1,0 +1,68 @@
+/* ==============================================
+ * Login :: common
+ * ============================================== */
+.no-margin-btm {
+    margin-bottom: 0;
+}
+
+/* ==============================================
+ * Login :: login > page
+ * ============================================== */
+.font-txt-center {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.font-txt-center span {
+    font-family: "Pretendard";
+    margin-right: 5px;
+}
+.font-txt-center * {
+    font-size: 14px;
+}
+.line-btm-black {
+    border-bottom: 1px solid #000;
+}
+.btn-wrap {
+    text-align: center;
+    padding-top: 40px;
+}
+.btn-wrap > span {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+.btn-kakao {
+    font-family: "Pretendard";
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    height: 40px;
+    background: #FEE500;
+    color: #000;
+}
+.btn-innerTxt {
+    font-family: "Pretendard";
+    font-weight: 500;
+    font-size: 14px;
+    padding-left: 30px;
+    background: url(/image/system/logo_kakao.png) no-repeat 0 50%;
+    background-size: contain;
+    color: #000;
+}
+.formBtnCancel {
+    display: block;
+    width: 100%;
+    height: 40px;
+    color: #000;
+    background: transparent;
+    border: 1px solid #000;
+    font-family: 'Inconsolata';
+    font-size: 16px !important;
+    font-weight: 500;
+    text-align: center;
+    line-height: 40px;
+    letter-spacing: 0;
+    margin: -10px 0 0;
+}

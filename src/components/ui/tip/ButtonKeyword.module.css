@@ -1,0 +1,7 @@
+.buttonKeyword {
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 18px;
+    border-radius: 18px;
+    background-color: var(--appl-color-w2);
+}

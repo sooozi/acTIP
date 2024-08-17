@@ -1,0 +1,416 @@
+.addIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--appl-color-point);
+}
+
+.addIcon::after {
+  content: '';
+  position: absolute;
+  background-color: black;
+  width: 10%;
+  height: 50%;
+}
+
+.addIcon::before {
+  content: '';
+  position: absolute;
+  background-color: black;
+  width: 50%;
+  height: 10%;
+}
+
+.btn-dday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 4px;
+  font-size: 10px;
+  color: white;
+  width: 40px;
+  height: 20px;
+  background-color: black;
+}
+
+.flex-c-sb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.myItem {
+  display: block;
+  height: 130px;
+  padding: 20px 20px 20px 20px;
+  border-bottom: 1px solid gray;
+}
+
+.myItem div {
+  font-weight: 600;
+}
+
+.myItem > div:nth-child(1) {
+  height: 30px;
+}
+
+.myItem > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+
+.myItem > div:nth-child(3) {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: 30px;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background-color: black;
+  border-radius: 0px;
+}
+
+.progressBar > div {
+  height: 100%;
+  width: 40%;
+  border-radius: inherit;
+  overflow: hidden;
+  background-color: var(--appl-color-point);
+}
+
+.calendarFromTo {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 40px;
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.calendarFromTo * {
+  font-weight: 600;
+}
+
+.calendarFromTo label {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.calendarFromTo .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calendarFromTo .header > div:nth-child(1),
+.calendarFromTo .header > div:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.calendarFromTo .tableHeader {
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.calendarFromTo .tableHeader > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.calendarFromTo .tableBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+}
+
+.calendarFromTo .tableBody > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+
+.calendarFromTo .tableBody > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.calendarFromTo .tableBody > div > div.overMonth {
+  color: transparent;
+  background-color: transparent;
+}
+
+.calendarFromTo .tableBody > div > div.selectedStart {
+  color: var(--color-font-selected);
+  border: 1px solid black;
+  background-color: var(--appl-color-point);
+}
+
+.calendarFromTo .tableBody > div > div.selectedEnd {
+  color: white;
+  background-color: var(--appl-color);
+}
+
+.calendarFromTo .tableBody > div > div.selectedRange {
+  color: var(--color-font-selected);
+  background-color: var(--appl-color-point);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.formBtn {
+  color: #fff;
+  width: 100%;
+  height: 40px;
+  background: #000;
+  font-family: 'Inconsolata';
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.formBtn.weak {
+  color: black;
+  width: 100%;
+  height: 40px;
+  background: var(--appl-color-sub);
+  font-family: 'Inconsolata';
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid black;
+}
+
+.rowFull {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 20px;
+  border-bottom: 1px solid black;
+}
+
+.rowFull.link {
+  color: white;
+  background-color: black;
+}
+.rowFull.link > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rowFull.strong {
+  color: white;
+  background-color: black;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rowFull.checkBox {
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.checkBoxWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-top: 20px;
+}
+
+.checkBoxWrapper > div {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fonrUnderLine {
+  text-decoration: underline;
+}
+
+.boardCategory {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.boardCategory > div {
+  cursor: pointer;
+  height: 500px;
+}
+
+.boardCategory > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.boardCategory > div > div > span {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.categorySearch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  color: white;
+  background-color: black;
+  padding: 0px 30px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.categorySearch > span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.categorySearch > input {
+  background-color: transparent;
+  color: white;
+  height: 60px;
+  width: 100%;
+}
+
+.categoryTitle {
+  font-size: 16px;
+  padding: 0px 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* 카테고리별 검색결과  */
+.categoryListTitle {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0px 30px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.categoryListItem {
+  display: block;
+  height: 170px;
+  padding: 30px;
+  border-bottom: 1px solid black;
+}
+
+.categoryListItem > div:nth-child(1) {
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.categoryListItem > div:nth-child(2) {
+  height: 30px;
+}
+
+.categoryListItem > div:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.noItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.noItem > div {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.tempModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.tempModal > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: black;
+  width: 70%;
+  max-width: 300px;
+  height: 200px;
+  color: white;
+  padding: 20px;
+}
+
+.tempModal > div > div:nth-child(1) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tempModal > div > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 1599px) {
+}
+
+@media (min-width: 1600px) {
+  .tempModal {
+    position: relative;
+    top: -549px;
+  }
+}
