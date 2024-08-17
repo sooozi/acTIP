@@ -11,7 +11,7 @@ export default function Home() {
       <div className="page-mo-root">
         <div className="mo-main-txt">
           <span className="font-color-white font-20 line-15">
-            ssWe exist to help you
+            We exist to help you
           </span>
           <br />
           <span className="font-color-white font-20 line-15">with </span>
