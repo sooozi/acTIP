@@ -129,7 +129,7 @@ export default function LoginPage() {
   return (
     <div className="subMO">
       <div className="subMO-top subMO-side line-btm-black">
-        <h1 className="subMo-tit font-24">logindd</h1>
+        <h1 className="subMo-tit font-24">login</h1>
         <form
           noValidate
           onSubmit={handleSubmit(onSubmit)}
