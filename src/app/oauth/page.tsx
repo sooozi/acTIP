@@ -8,7 +8,7 @@ export default function OauthMyPage() {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const code = queryParams.get('code');
-    console.log('Authorization code:', code); // 이 줄 추가
+    console.log('Authorization codedddddd:', code); // 이 줄 추가
     if (code) {
       axios
         .post('http://15.164.202.203:8080//api/user/login/kakao', { code })
