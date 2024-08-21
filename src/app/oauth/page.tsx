@@ -11,7 +11,7 @@ export default function OauthMyPage() {
     console.log('Authorization code:', code); // 이 줄 추가
     if (code) {
       axios
-        .post('/api/user/login/kakao', { code })
+        .post('http://15.164.202.203:8080//api/user/login/kakao', { code })
         .then((response) => {
           console.log('응답 데이터:', response.data);
           localStorage.setItem('name', response.data.user_name); // 사용자 이름 또는 토큰 저장
