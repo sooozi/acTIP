@@ -66,15 +66,15 @@ export default function OauthMyPage() {
   // const url = `http://15.164.202.203:8080/api/user/login/kakao?code=${code}`;
   // window.open(url, '_blank'); // 새 탭에서 링크 열기
 
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  };
+  // const headers = {
+  //   'Content-Type': 'application/x-www-form-urlencoded',
+  // };
 
   useEffect(() => {
     if (code) {
       fetch(`http://15.164.202.203:8080/api/user/login/kakao?code=${code}`, {
         method: 'GET',
-        headers: headers,
+        // headers: headers,
       })
         .then((response) => {
           if (!response.ok) {
