@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   },
 };
 
+declare global {
+  interface Window {
+    Kakao: unknown;
+  }
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,6 +30,11 @@ export default function RootLayout({
         <script
           defer
           src="https://cdn.swygbro.com/public/widget/swyg-widget.js"
+        ></script>
+        {/* JavaScript SDK 추가하기 */}
+        <script
+          defer
+          src="https://developers.kakao.com/sdk/js/kakao.js"
         ></script>
 
         {/* 메타 태그 추가 */}
