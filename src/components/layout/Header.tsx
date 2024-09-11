@@ -159,13 +159,13 @@ export default function Header() {
             !isUserPath && (
               <span
                 className={`fonrUnderLine pointer ${isUserPath ? 'userPath' : ''}`}
-                // onClick={() => {
-                //   if (!isUserPath) {
-                //     router.push('/user');
-                //   }
-                // }}
+                onClick={() => {
+                  if (!isUserPath) {
+                    router.push('/user');
+                  }
+                }}
               >
-                {userInfo?.nickName || ' '}
+                {userInfo?.nickName || 'Kakao User'}
               </span>
             )
           )}
