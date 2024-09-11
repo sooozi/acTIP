@@ -18,14 +18,24 @@ interface FormValues {
 }
 
 export default function ProfilePage() {
-  const { userInfo } = useUserStore((state) => ({
+  const { userInfo, resetUserInfo } = useUserStore((state) => ({
     userInfo: state.userInfo,
+    resetUserInfo: state.resetUserInfo,
   })) as UserInfo;
   const accessToken = useUserStore((state) => state.getToken());
   const [imagePreview, setImagePreview] = useState('/image/system/profile.png');
   const [imageError, setImageError] = useState<string | null>(null); // 이미지 에러
   const [isSubmitted, setIsSubmitted] = useState(false); // 제출 상태
   const router = useRouter();
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log('토큰:', storedToken); // 디버깅: 콘솔에 토큰 출력
+  }, []);
+
+  console.log('Retrieved accessToken:', accessToken);
 
   // React Hook Form 설정
   const {
@@ -225,32 +235,40 @@ export default function ProfilePage() {
   };
 
   //로그아웃
-  const handleLogout = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('/api/user/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      if (response.ok) {
-        useUserStore.getState().resetUserInfo();
-        router.push('/user/login');
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-        console.error('로그아웃 실패:', await response.text());
-      }
-    } catch (error) {
-      console.error('로그아웃 오류:', error);
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    resetUserInfo();
+    router.push('/user/login');
   };
+  // const handleLogout = async () => {
+  //   try {
+  //     // const token = localStorage.getItem('token');
+  //     const token2 = useUserStore((state) => state.getToken());
+  //     console.log('저장된 토큰:', token2); // 콘솔에 토큰 출력
+  //     if (!token2) {
+  //       throw new Error('토큰이 없습니다.');
+  //     }
+
+  //     const response = await fetch('/api/user/logout', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token2}`,
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     useUserStore.getState().resetUserInfo();
+  //     localStorage.removeItem('token'); // 로그아웃 후 토큰 제거
+  //     router.push('/user/login');
+  //   } catch (error) {
+  //     console.error('로그아웃 오류:', error);
+  //     alert('로그아웃 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
+  //   }
+  // };
 
   const clearError = () => {
     setImageError(null);
@@ -330,9 +348,19 @@ export default function ProfilePage() {
                 )}
               />
             </div>
-            <button type="button" className="btn-logout" onClick={handleLogout}>
-              logout
-            </button>
+            <div>
+              {accessToken ? (
+                <button
+                  type="button"
+                  className="btn-logout"
+                  onClick={handleLogout}
+                >
+                  logout
+                </button>
+              ) : (
+                <p>로그인 상태가 아닙니다.</p>
+              )}
+            </div>
           </form>
         </div>
       </div>
