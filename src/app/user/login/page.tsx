@@ -201,7 +201,7 @@ export default function LoginPage() {
       <div className="subMO-side btn-wrap">
         <span>or</span>
         <button type="button" className="btn-kakao" onClick={kakaoLoginHandler}>
-          <span className="btn-innerTxt">카카오톡으로 시작하기</span>
+          <span className="btn-innerTxt">카카오톡으로 시작하기ㅇㅇㅇ</span>
         </button>
       </div>
     </div>
