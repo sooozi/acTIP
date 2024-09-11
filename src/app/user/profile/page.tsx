@@ -365,7 +365,7 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className="pw-box subMO-side line-btm-black">
-        <Link href="/user">
+        <Link href="/user/profile/pw_set">
           <span className="font-underline">비밀번호 변경</span>
         </Link>
       </div>
