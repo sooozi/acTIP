@@ -224,6 +224,7 @@ export default function ProfilePage() {
     fileInput.click();
   };
 
+  //로그아웃
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -235,10 +236,15 @@ export default function ProfilePage() {
         },
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       if (response.ok) {
         useUserStore.getState().resetUserInfo();
         router.push('/user/login');
       } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
         console.error('로그아웃 실패:', await response.text());
       }
     } catch (error) {

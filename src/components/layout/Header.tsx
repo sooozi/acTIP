@@ -161,11 +161,11 @@ export default function Header() {
                 className={`fonrUnderLine pointer ${isUserPath ? 'userPath' : ''}`}
                 onClick={() => {
                   if (!isUserPath) {
-                    router.push('/user');
+                    router.push('/user/profile');
                   }
                 }}
               >
-                {userInfo?.nickName || 'Kakao User'}
+                {userInfo?.nickName || ''}
               </span>
             )
           )}
