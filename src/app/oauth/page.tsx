@@ -55,8 +55,57 @@
 
 // 'use client';
 
-// import { useEffect } from 'react';
-// import DoingPage from '../my/doing/page';
+import { useEffect, useState } from 'react';
+import DoingPage from '../my/doing/page';
+
+export default function OauthMyPage() {
+  const [code, setCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const queryParams = new URLSearchParams(window.location.search);
+      const codeFromUrl = queryParams.get('code');
+      if (codeFromUrl) {
+        setCode(codeFromUrl);
+        console.log('Authorization code:', codeFromUrl); // 디버깅용 로그
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (code) {
+      fetch(`http://15.164.202.203:8080/api/user/login/kakao?code=${code}`)
+        .then((response) => {
+          if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log('Response data:', data);
+          if (data.result) {
+            console.log('User ID:', data.result.user_id);
+            console.log('JWT:', data.result.jwt);
+          } else {
+            console.error('Unexpected response structure:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('오류 발생:', error.message);
+          console.error('Error details:', error);
+        });
+    } else {
+      console.error('Authorization code is missing');
+    }
+  }, [code]);
+
+  return (
+    <>
+      <DoingPage />
+    </>
+  );
+}
 
 // export default function OauthMyPage() {
 //   const queryParams = new URLSearchParams(window.location.search);

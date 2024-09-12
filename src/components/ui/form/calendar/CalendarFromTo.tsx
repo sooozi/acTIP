@@ -2,31 +2,30 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight } from '@/src/components/icon/IconSVG';
-import styles from './CalendarFromTo.module.css';
+import { useEffect, useState } from 'react';
 
 import {
-  format,
-  addMonths,
-  subMonths,
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
   addDays,
-  isSameMonth,
-  isSameDay,
+  addMonths,
+  endOfMonth,
+  endOfWeek,
+  format,
   isAfter,
-  parse,
   isBefore,
+  isSameDay,
+  isSameMonth,
+  parse,
+  startOfMonth,
+  startOfWeek,
+  subMonths,
 } from 'date-fns';
 
 interface CalendarFromToProps {
   label?: string;
   start?: string;
   end?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (dates: { start: Date | null; end: Date | null }) => void;
 }
 
 const CalendarFromTo = ({
@@ -37,8 +36,8 @@ const CalendarFromTo = ({
 }: CalendarFromToProps) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState<{
-    start: unknown;
-    end: unknown;
+    start: Date | null;
+    end: Date | null;
   }>({
     start: null,
     end: null,
@@ -159,9 +158,11 @@ const CalendarFromTo = ({
     setCurrentMonth(subMonths(currentMonth, 1));
   };
 
-  useEffect(() => {
-    onChange(selectedDates);
-  }, [selectedDates]);
+  seEffect(() => {
+    if (onChange) {
+      onChange(selectedDates);
+    }
+  }, [selectedDates, onChange]); // onChange를 의존성 배열에 추가
 
   useEffect(() => {
     const s = start ? parse(start, 'yyyy-MM-dd', new Date()) : null;

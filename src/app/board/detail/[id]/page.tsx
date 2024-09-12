@@ -8,7 +8,7 @@ import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: { id: string } }) {
   const accessToken = useUserStore((state) => state.getToken());
@@ -31,7 +31,7 @@ export default function Page({ params }: { params: { id: string } }) {
   });
   // const getToken = useUserStore((state) => state.getToken);
 
-  const findItem = async () => {
+  const findItem = useCallback(async () => {
     await axios
       .get(`/api/tip/${params.id}`, {
         headers: {
@@ -62,7 +62,7 @@ export default function Page({ params }: { params: { id: string } }) {
           checkedItems: checkItem,
         });
       });
-  };
+  }, [params.id, accessToken]); // 의존성으로 params.id와 accessToken 추가
 
   const addTip = async () => {
     try {
@@ -99,7 +99,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     findItem();
-  }, []);
+  }, [findItem]);
 
   return (
     <div>
