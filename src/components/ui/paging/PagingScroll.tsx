@@ -4,7 +4,7 @@
 
 import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Spinner from '../system/Spinner';
 
 interface PagingScrollProps {
@@ -27,35 +27,36 @@ export default function PagingScroll({
   const [pageLast, setPageLast] = useState<boolean>(false);
   const [pagingState, setPagingState] = useState<'idle' | 'loading'>('idle');
 
-  const search = (refresh = false) => {
-    setPagingState('loading');
-    setPagingState('idle');
-    axios
-      .get(url + `&pageSize=8&cursor=${cursor ? cursor : ''}`, {
-        headers: {
-          Authorization: getToken(),
-        },
-      })
-      .then((res) => {
-        let itemList = [];
-        setCursor(res.data.payload.nextCursor);
-        res.data.payload.contents.forEach((item) => {
-          itemList.push(item);
+  const search = useCallback((refresh = false) => {
+    if (pagingState === 'loading') return; // Prevent multiple simultaneous requests
+
+      setPagingState('loading');
+      axios
+        .get(url + `&pageSize=${size}&cursor=${cursor ? cursor : ''}`, {
+          headers: {
+            Authorization: getToken(),
+          },
+        })
+        .then((res) => {
+          let itemList = res.data.payload.contents || [];
+          setCursor(res.data.payload.nextCursor || '');
+          setPageLast(itemList.length === 0);
+
+          if (refresh) {
+            setPageItem(itemList);
+          } else {
+            setPageItem((prevItems) => [...prevItems, ...itemList]);
+          }
+
+          setPagingState('idle');
+        })
+        .catch((err) => {
+          console.error('API 요청 오류:', err);
+          setPagingState('idle');
         });
-
-        if (res.data.payload.contents.length === 0) {
-          setPageLast(true);
-        }
-
-        if (refresh) {
-          setPageItem(itemList);
-        } else {
-          setPageItem([...pageItem, ...itemList]);
-        }
-
-        setPagingState('idle');
-      });
-  };
+    },
+    [url, cursor, pagingState, getToken, size]
+  );
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -81,7 +82,7 @@ export default function PagingScroll({
         observer.unobserve(currentRef);
       }
     };
-  }, [ref, pageLast, cursor, search]);
+  }, [pageLast, search]);
 
   useEffect(() => {
     if (isInitialMount.current) {
