@@ -27,8 +27,9 @@ export default function PagingScroll({
   const [pageLast, setPageLast] = useState<boolean>(false);
   const [pagingState, setPagingState] = useState<'idle' | 'loading'>('idle');
 
-  const search = useCallback((refresh = false) => {
-    if (pagingState === 'loading') return; // Prevent multiple simultaneous requests
+  const search = useCallback(
+    (refresh = false) => {
+      if (pagingState === 'loading') return; // Prevent multiple simultaneous requests
 
       setPagingState('loading');
       axios
@@ -93,7 +94,7 @@ export default function PagingScroll({
       setPageLast(false);
       setPageItem([]);
     }
-  }, [url]);
+  }, [url, search]);
 
   return (
     <div>
