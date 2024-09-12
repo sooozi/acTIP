@@ -12,14 +12,21 @@ const intialState = {
   refreshToken: null,
 };
 
-const useUserStore = create(
+interface UserState {
+  userInfo: typeof intialState;
+  resetUserInfo: () => void;
+  setUserInfo: (data: Partial<typeof intialState>) => void;
+  getToken: () => string | null;
+}
+
+const useUserStore = create<UserState>()(
   persist(
     (set, get) => ({
       userInfo: intialState,
-      resetUserInfo: (data) => set((state) => ({ userInfo: intialState })),
+      resetUserInfo: () => set({ userInfo: intialState }),
       setUserInfo: (data) =>
         set((state) => ({ userInfo: { ...state.userInfo, ...data } })),
-      getToken: () => get().userInfo.accessToken
+      getToken: () => get().userInfo.accessToken,
     }),
     {
       name: 'userStore',

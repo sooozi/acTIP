@@ -1,16 +1,16 @@
-// @ts-nocheck
+// @ts-check
 
 'use client';
 
 import FormBtn from '@/src/components/ui/form/button/FormBtn';
 import CalendarFromTo from '@/src/components/ui/form/calendar/CalendarFromTo';
-import FormTextInput from '@/src/components/ui/form/input/FormTextInput';
-import { useState } from 'react';
-import { format } from 'date-fns';
 import FormSelect from '@/src/components/ui/form/input/FormSelect';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import FormTextInput from '@/src/components/ui/form/input/FormTextInput';
 import useUserStore from '@/src/store/userUserStore';
+import axios from 'axios';
+import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface Params {
   tipLink: string;
@@ -19,6 +19,11 @@ interface Params {
   actCnt: string;
   deadLine_start: string;
   deadLine_end: string;
+}
+
+interface CalendarEvent {
+  start: Date | null;
+  end: Date | null;
 }
 
 export default function Page() {
@@ -33,20 +38,21 @@ export default function Page() {
     deadLine_end: '',
   });
 
-  const handleForm = (event, name) => {
+  const handleForm = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    name: keyof Params
+  ) => {
     setParams({
       ...params,
       [name]: event.target.value,
     });
   };
 
-  const handleCalendar = (e: unknown) => {
+  const handleCalendar = (e: CalendarEvent) => {
     setParams({
       ...params,
-      ['deadLine_start']: e.start
-        ? format(new Date(e.start), 'yyyy-MM-dd')
-        : '',
-      ['deadLine_end']: e.end ? format(new Date(e.end), 'yyyy-MM-dd') : '',
+      deadLine_start: e.start ? format(e.start, 'yyyy-MM-dd') : '',
+      deadLine_end: e.end ? format(e.end, 'yyyy-MM-dd') : '',
     });
   };
 
@@ -57,7 +63,7 @@ export default function Page() {
           Authorization: getToken(),
         },
       })
-      .then((res) => {
+      .then(() => {
         router.push('/my/doing');
       });
   };
@@ -69,31 +75,31 @@ export default function Page() {
           value={params.tipLink}
           label="링크를 삽입해주세요"
           placeholder=""
-          onChange={(value) => handleForm(value, 'tipLink')}
+          onChange={(e) => handleForm(e, 'tipLink')}
           type="text"
         />
         <FormTextInput
           value={params.tipTitle}
           label="팁의 제목을 적어주세요"
           placeholder=""
-          onChange={(value) => handleForm(value, 'tipTitle')}
+          onChange={(e) => handleForm(e, 'tipTitle')}
           type="text"
         />
         <FormSelect
           value={params.categoryId}
           label="카테고리를 설정해주세요"
-          onChange={(value) => handleForm(value, 'categoryId')}
+          onChange={(e) => handleForm(e, 'categoryId')}
         />
         <FormTextInput
           value={params.actCnt}
           label="실천 횟수를 적어주세요"
           placeholder=""
-          onChange={(value) => handleForm(value, 'actCnt')}
+          onChange={(e) => handleForm(e, 'actCnt')}
           type="text"
         />
 
         <CalendarFromTo
-          label={'데드라인을 설정해 주세요'}
+          label="데드라인을 설정해 주세요"
           onChange={handleCalendar}
         />
 
