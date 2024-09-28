@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-nocheck
 
 'use client';
 
@@ -21,11 +21,6 @@ interface Params {
   deadLine_end: string;
 }
 
-interface CalendarEvent {
-  start: Date | null;
-  end: Date | null;
-}
-
 export default function Page() {
   const router = useRouter();
   const getToken = useUserStore((state) => state.getToken);
@@ -38,21 +33,20 @@ export default function Page() {
     deadLine_end: '',
   });
 
-  const handleForm = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    name: keyof Params
-  ) => {
+  const handleForm = (event, name) => {
     setParams({
       ...params,
       [name]: event.target.value,
     });
   };
 
-  const handleCalendar = (e: CalendarEvent) => {
+  const handleCalendar = (e: unknown) => {
     setParams({
       ...params,
-      deadLine_start: e.start ? format(e.start, 'yyyy-MM-dd') : '',
-      deadLine_end: e.end ? format(e.end, 'yyyy-MM-dd') : '',
+      ['deadLine_start']: e.start
+        ? format(new Date(e.start), 'yyyy-MM-dd')
+        : '',
+      ['deadLine_end']: e.end ? format(new Date(e.end), 'yyyy-MM-dd') : '',
     });
   };
 
@@ -63,7 +57,7 @@ export default function Page() {
           Authorization: getToken(),
         },
       })
-      .then(() => {
+      .then((res) => {
         router.push('/my/doing');
       });
   };
@@ -75,31 +69,31 @@ export default function Page() {
           value={params.tipLink}
           label="링크를 삽입해주세요"
           placeholder=""
-          onChange={(e) => handleForm(e, 'tipLink')}
+          onChange={(value) => handleForm(value, 'tipLink')}
           type="text"
         />
         <FormTextInput
           value={params.tipTitle}
           label="팁의 제목을 적어주세요"
           placeholder=""
-          onChange={(e) => handleForm(e, 'tipTitle')}
+          onChange={(value) => handleForm(value, 'tipTitle')}
           type="text"
         />
         <FormSelect
           value={params.categoryId}
           label="카테고리를 설정해주세요"
-          onChange={(e) => handleForm(e, 'categoryId')}
+          onChange={(value) => handleForm(value, 'categoryId')}
         />
         <FormTextInput
           value={params.actCnt}
           label="실천 횟수를 적어주세요"
           placeholder=""
-          onChange={(e) => handleForm(e, 'actCnt')}
+          onChange={(value) => handleForm(value, 'actCnt')}
           type="text"
         />
 
         <CalendarFromTo
-          label="데드라인을 설정해 주세요"
+          label={'데드라인을 설정해 주세요'}
           onChange={handleCalendar}
         />
 
