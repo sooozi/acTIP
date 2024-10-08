@@ -21,7 +21,7 @@ interface Params {
   deadLine_end: string;
 }
 
-export default function Page() {
+export default function NewPage() {
   const router = useRouter();
   const getToken = useUserStore((state) => state.getToken);
   const [params, setParams] = useState<Params>({
