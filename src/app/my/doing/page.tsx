@@ -7,7 +7,7 @@ import Tab from '@/src/components/ui/tab/Tab';
 import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Page() {
   const getToken = useUserStore((state) => state.getToken);
@@ -18,28 +18,31 @@ export default function Page() {
     { name: 'finish', url: '/my/finish' },
   ];
 
-  const findItem = useCallback(async () => {
-    try {
-      const res = await axios.get('/api/tip/doing?pageSize=15', {
+  const findItem = async () => {
+    await axios
+      .get('/api/tip/doing?pageSize=15', {
         headers: {
           Authorization: getToken(),
         },
+      })
+      .then((res) => {
+        let itemList = [];
+        res.data.payload.contents.forEach((item) => {
+          itemList.push({
+            id: item.id,
+            title: item.tipTitle,
+            progress: item.presentPercent,
+            dDay: item.d_day,
+          });
+        });
+
+        setPageItem(itemList);
       });
-      let itemList = res.data.payload.contents.map((item) => ({
-        id: item.id,
-        title: item.tipTitle,
-        progress: item.presentPercent,
-        dDay: item.d_day,
-      }));
-      setPageItem(itemList);
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    }
-  }, [getToken]); // getToken을 의존성에 추가
+  };
 
   useEffect(() => {
     findItem();
-  }, [findItem]); // findItem을 의존성 배열에 추가
+  }, []);
 
   return (
     <div className="subMO">

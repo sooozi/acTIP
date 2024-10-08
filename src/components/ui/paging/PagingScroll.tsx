@@ -2,15 +2,15 @@
 
 'use client';
 
-import useUserStore from '@/src/store/userUserStore';
-import axios from 'axios';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Spinner from '../system/Spinner';
+import axios from 'axios';
+import useUserStore from '@/src/store/userUserStore';
 
 interface PagingScrollProps {
-  url: string;
-  size?: number;
-  PageItem: React.FC<{ data: unknown }>;
+  url: unknown;
+  size: unknown;
+  PageItem: unknown;
 }
 
 export default function PagingScroll({
@@ -18,72 +18,70 @@ export default function PagingScroll({
   size = 20,
   PageItem,
 }: PagingScrollProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const isInitialMount = useRef(true);
   const getToken = useUserStore((state) => state.getToken);
 
-  const [cursor, setCursor] = useState<string>('');
-  const [pageItem, setPageItem] = useState<unknown[]>([]);
-  const [pageLast, setPageLast] = useState<boolean>(false);
-  const [pagingState, setPagingState] = useState<'idle' | 'loading'>('idle');
+  const [cursor, setCursor] = useState('');
+  const [pageItem, setPageItem] = useState([]);
+  const [pageLast, setPageLast] = useState(false);
+  const [pagingState, setPagingState] = useState();
 
-  const search = useCallback(
-    (refresh = false) => {
-      if (pagingState === 'loading') return; // Prevent multiple simultaneous requests
-
-      setPagingState('loading');
-      axios
-        .get(url + `&pageSize=${size}&cursor=${cursor ? cursor : ''}`, {
-          headers: {
-            Authorization: getToken(),
-          },
-        })
-        .then((res) => {
-          let itemList = res.data.payload.contents || [];
-          setCursor(res.data.payload.nextCursor || '');
-          setPageLast(itemList.length === 0);
-
-          if (refresh) {
-            setPageItem(itemList);
-          } else {
-            setPageItem((prevItems) => [...prevItems, ...itemList]);
-          }
-
-          setPagingState('idle');
-        })
-        .catch((err) => {
-          console.error('API 요청 오류:', err);
-          setPagingState('idle');
+  const search = (refresh = false) => {
+    setPagingState('loading');
+    setPagingState('idle');
+    axios
+      .get(url + `&pageSize=8&cursor=${cursor ? cursor : ''}`, {
+        headers: {
+          Authorization: getToken(),
+        },
+      })
+      .then((res) => {
+        let itemList = [];
+        setCursor(res.data.payload.nextCursor);
+        res.data.payload.contents.forEach((item) => {
+          itemList.push(item);
         });
-    },
-    [url, cursor, pagingState, getToken, size]
-  );
+
+        if (res.data.payload.contents.length === 0) {
+          setPageLast(true);
+        }
+
+        if (refresh) {
+          setPageItem(itemList);
+        } else {
+          setPageItem([...pageItem, ...itemList]);
+        }
+
+        setPagingState('idle');
+      });
+  };
 
   useEffect(() => {
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      const entry = entries[0];
-      if (entry.isIntersecting && !pageLast) {
-        search();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !pageLast) {
+          search();
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1,
       }
-    };
+    );
 
-    const observer = new IntersectionObserver(observerCallback, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1,
-    });
-
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (ref.current) {
+        observer.unobserve(ref.current);
       }
     };
-  }, [pageLast, search]);
+  }, [ref, pageLast, cursor]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -94,7 +92,7 @@ export default function PagingScroll({
       setPageLast(false);
       setPageItem([]);
     }
-  }, [url, search]);
+  }, [url]);
 
   return (
     <div>

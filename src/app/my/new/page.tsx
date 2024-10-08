@@ -4,13 +4,13 @@
 
 import FormBtn from '@/src/components/ui/form/button/FormBtn';
 import CalendarFromTo from '@/src/components/ui/form/calendar/CalendarFromTo';
-import FormSelect from '@/src/components/ui/form/input/FormSelect';
 import FormTextInput from '@/src/components/ui/form/input/FormTextInput';
-import useUserStore from '@/src/store/userUserStore';
-import axios from 'axios';
-import { format } from 'date-fns';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { format } from 'date-fns';
+import FormSelect from '@/src/components/ui/form/input/FormSelect';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import useUserStore from '@/src/store/userUserStore';
 
 interface Params {
   tipLink: string;
@@ -21,7 +21,7 @@ interface Params {
   deadLine_end: string;
 }
 
-export default function NewPage() {
+export default function Page() {
   const router = useRouter();
   const getToken = useUserStore((state) => state.getToken);
   const [params, setParams] = useState<Params>({

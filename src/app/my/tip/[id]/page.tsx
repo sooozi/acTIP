@@ -8,7 +8,7 @@ import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -32,39 +32,38 @@ export default function Page({ params }: { params: { id: string } }) {
     router.push(`/my/edit/${params.id}`);
   };
 
-  const findItem = useCallback(async () => {
-    try {
-      const res = await axios.get(`/api/tip/${params.id}`, {
+  const findItem = async () => {
+    await axios
+      .get(`/api/tip/${params.id}`, {
         headers: {
           Authorization: getToken(),
         },
+      })
+      .then((res) => {
+        let checkItem = [];
+        const actCnt = res.data.payload.actCnt;
+        const actCnt_checked = res.data.payload.actCnt_checked;
+
+        for (let i = 0; i < res.data.payload.actCnt; i++) {
+          checkItem.push(i < actCnt_checked);
+        }
+
+        setPageItem({
+          id: res.data.payload.id,
+          tipLink: res.data.payload.tipLink,
+          tipTitle: res.data.payload.tipTitle,
+          categoryId: res.data.payload.categoryId,
+          actCnt: actCnt,
+          deadLine_start: res.data.payload.deadLine_start,
+          deadLine_end: res.data.payload.deadLine_end,
+          categoryName: res.data.payload.categoryName,
+          periodDate: res.data.payload.periodDate,
+          d_day: res.data.payload.d_day,
+          actCnt_checked: actCnt_checked,
+          checkedItems: checkItem,
+        });
       });
-
-      let checkItem = [];
-      const { actCnt, actCnt_checked } = res.data.payload;
-
-      for (let i = 0; i < actCnt; i++) {
-        checkItem.push(i < actCnt_checked);
-      }
-
-      setPageItem({
-        id: res.data.payload.id,
-        tipLink: res.data.payload.tipLink,
-        tipTitle: res.data.payload.tipTitle,
-        categoryId: res.data.payload.categoryId,
-        actCnt: actCnt,
-        deadLine_start: res.data.payload.deadLine_start,
-        deadLine_end: res.data.payload.deadLine_end,
-        categoryName: res.data.payload.categoryName,
-        periodDate: res.data.payload.periodDate,
-        d_day: res.data.payload.d_day,
-        actCnt_checked: actCnt_checked,
-        checkedItems: checkItem,
-      });
-    } catch (error) {
-      console.error('Failed to fetch item data:', error);
-    }
-  }, [params.id, getToken]);
+  };
 
   const changeChecked = async (index) => {
     let newCheckedItems = [...pageItem.checkedItems];
@@ -108,7 +107,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     findItem();
-  }, [findItem]); // Add findItem as a dependency to useEffect
+  }, []);
 
   return (
     <div>
@@ -126,7 +125,7 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className="rowFull">{pageItem.periodDate}</div>
         <div className="rowFull checkBox">
           <div className="flex-c-sb w-100">
-            <span>{'D' + pageItem.d_day}</span>
+            <span>{'D-' + pageItem.d_day}</span>
             <span>{pageItem.actCnt_checked + '/' + pageItem.actCnt}</span>
           </div>
           <div className="checkBoxWrapper">

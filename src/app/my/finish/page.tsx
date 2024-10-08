@@ -7,7 +7,7 @@ import Tab from '@/src/components/ui/tab/Tab';
 import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Page() {
   const getToken = useUserStore((state) => state.getToken);
@@ -18,8 +18,7 @@ export default function Page() {
     { name: 'finish', url: '/my/finish' },
   ];
 
-  // Use useCallback to memoize the findItem function
-  const findItem = useCallback(async () => {
+  const findItem = async () => {
     await axios
       .get('/api/tip/finish?pageSize=15', {
         headers: {
@@ -39,11 +38,11 @@ export default function Page() {
 
         setPageItem(itemList);
       });
-  }, [getToken]);
+  };
 
   useEffect(() => {
     findItem();
-  }, [findItem]); // findItem을 의존성 배열에 추가
+  }, []);
 
   return (
     <div className="subMO">

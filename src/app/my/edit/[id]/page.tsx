@@ -8,9 +8,9 @@ import FormSelect from '@/src/components/ui/form/input/FormSelect';
 import FormTextInput from '@/src/components/ui/form/input/FormTextInput';
 import useUserStore from '@/src/store/userUserStore';
 import axios from 'axios';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -48,40 +48,38 @@ export default function Page({ params }: { params: { id: string } }) {
     });
   };
 
-  const findItem = useCallback(async () => {
-    try {
-      const res = await axios.get(`/api/tip/${params.id}`, {
+  const findItem = async () => {
+    await axios
+      .get(`/api/tip/${params.id}`, {
         headers: {
           Authorization: getToken(),
         },
+      })
+      .then((res) => {
+        let checkItem = [];
+        const actCnt = res.data.payload.actCnt;
+        const actCnt_checked = res.data.payload.actCnt_checked;
+
+        for (let i = 0; i < res.data.payload.actCnt; i++) {
+          checkItem.push(i < actCnt_checked);
+        }
+
+        setPageItem({
+          id: res.data.payload.id,
+          tipLink: res.data.payload.tipLink,
+          tipTitle: res.data.payload.tipTitle,
+          categoryId: res.data.payload.categoryId,
+          actCnt: actCnt,
+          deadLine_start: res.data.payload.deadLine_start,
+          deadLine_end: res.data.payload.deadLine_end,
+          categoryName: res.data.payload.categoryName,
+          periodDate: res.data.payload.periodDate,
+          d_day: res.data.payload.d_day,
+          actCnt_checked: actCnt_checked,
+          checkedItems: checkItem,
+        });
       });
-
-      let checkItem = [];
-      const actCnt = res.data.payload.actCnt;
-      const actCnt_checked = res.data.payload.actCnt_checked;
-
-      for (let i = 0; i < res.data.payload.actCnt; i++) {
-        checkItem.push(i < actCnt_checked);
-      }
-
-      setPageItem({
-        id: res.data.payload.id,
-        tipLink: res.data.payload.tipLink,
-        tipTitle: res.data.payload.tipTitle,
-        categoryId: res.data.payload.categoryId,
-        actCnt: actCnt,
-        deadLine_start: res.data.payload.deadLine_start,
-        deadLine_end: res.data.payload.deadLine_end,
-        categoryName: res.data.payload.categoryName,
-        periodDate: res.data.payload.periodDate,
-        d_day: res.data.payload.d_day,
-        actCnt_checked: actCnt_checked,
-        checkedItems: checkItem,
-      });
-    } catch (error) {
-      console.error('Error fetching item:', error);
-    }
-  }, [params.id, getToken]); // getToken 및 params.id를 의존성에 추가
+  };
 
   const update = async () => {
     await axios
@@ -97,7 +95,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     findItem();
-  }, [findItem]); // findItem을 의존성 배열에 추가
+  }, []);
 
   return (
     <div className="subMO-side">
