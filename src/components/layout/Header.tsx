@@ -12,7 +12,9 @@ interface UserInfo {
 
 export default function Header() {
   const pathname = usePathname();
+
   const router = useRouter();
+
   const { userInfo, resetUserInfo } = useUserStore((state) => ({
     userInfo: state.userInfo,
     resetUserInfo: state.resetUserInfo,
@@ -136,6 +138,7 @@ export default function Header() {
 
   const isFixedPage = pathname === '/my/doing' || pathname === '/my/finish';
 
+
   return (
     <>
       <header>
@@ -171,6 +174,8 @@ export default function Header() {
           )}
         </div>
       </header>
+
+
 
       {pageInfo?.common && (
         <div className={`page-top ${isFixedPage ? 'fixed' : ''}`}>
