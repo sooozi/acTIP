@@ -138,7 +138,6 @@ export default function Header() {
 
   const isFixedPage = pathname === '/my/doing' || pathname === '/my/finish';
 
-
   return (
     <>
       <header>
@@ -174,9 +173,6 @@ export default function Header() {
           )}
         </div>
       </header>
-
-
-
       {pageInfo?.common && (
         <div className={`page-top ${isFixedPage ? 'fixed' : ''}`}>
           <div>
