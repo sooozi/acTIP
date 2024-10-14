@@ -176,10 +176,12 @@ export default function Header() {
       {pageInfo?.common && (
         <div className={`page-top ${isFixedPage ? 'fixed' : ''}`}>
           <div>
+            
             <div>
               <div></div>
               <div></div>
             </div>
+
             <div>
               <h1 className="font-24">{pageInfo?.pageTitle}</h1>
               <div>
